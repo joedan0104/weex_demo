@@ -21,10 +21,11 @@ public class WXApplication extends Application {
         new InitConfig.Builder().setImgAdapter(new ImageAdapter()).build()
     );
     try {
-      WXSDKEngine.registerModule("event", WXEventModule.class);
+      WXSDKEngine.registerModule("navevent", WXEventModule.class);
     } catch (WXException e) {
       e.printStackTrace();
     }
+
     AppConfig.init(this);
     WeexPluginContainer.loadAll(this);
   }

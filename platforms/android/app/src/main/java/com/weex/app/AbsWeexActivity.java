@@ -216,6 +216,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -285,8 +286,6 @@ public abstract class AbsWeexActivity extends AppCompatActivity implements IWXRe
         url,
         options,
         jsonInitData,
-        CommonUtils.getDisplayWidth(this),
-        CommonUtils.getDisplayHeight(this),
         WXRenderStrategy.APPEND_ASYNC);
   }
 
@@ -386,7 +385,7 @@ public abstract class AbsWeexActivity extends AppCompatActivity implements IWXRe
 
   @Override
   public void onException(WXSDKInstance instance, String errCode, String msg) {
-
+    Log.d(TAG, "errCode: " + errCode + " msg: " + msg);
   }
 
   public void setReloadListener(WxReloadListener reloadListener) {

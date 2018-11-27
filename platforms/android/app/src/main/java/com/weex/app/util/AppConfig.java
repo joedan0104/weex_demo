@@ -18,7 +18,7 @@ public class AppConfig {
     if (isLaunchLocally()) {
       return sPreferences.getString("local_url", "file://assets/index.js");
     }
-    return sPreferences.getString("launch_url", "http://127.0.0.1:8080/dist/index.js");
+    return sPreferences.getString("launch_url", "http://192.168.190.153:8888/bundle/index1.js");
   }
 
   public static Boolean isLaunchLocally() {

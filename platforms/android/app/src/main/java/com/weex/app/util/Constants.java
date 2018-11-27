@@ -7,6 +7,9 @@ public class Constants {
   public static final String TEST_BUNDLE_URL = BUNDLE_URL;
   public static final String WEEX_SAMPLES_KEY = "?weex-samples";
   public static final String WEEX_TPL_KEY = "_wx_tpl";
+  /**
+   * Weex的Bundle URL
+   */
   public static final String PARAM_BUNDLE_URL = "bundleUrl";
 
 
