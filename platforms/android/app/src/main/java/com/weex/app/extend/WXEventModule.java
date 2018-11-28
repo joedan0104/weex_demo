@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.taobao.weex.WXSDKEngine;
+import com.taobao.weex.utils.WXLogUtils;
 import com.weex.app.WXPageActivity;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.common.WXModule;
@@ -35,6 +38,8 @@ public class WXEventModule extends WXModule {
      */
     @JSMethod
     public void ShoppingCart() {
-        Log.d("WXEventModule", "ShoppingCart");
+        WXLogUtils.d("WXEventModule", "ShoppingCart");
+        Toast.makeText(mWXSDKInstance.getContext(), "购物车", Toast.LENGTH_SHORT).show();
+
     }
 }
