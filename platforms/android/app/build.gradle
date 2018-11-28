@@ -1,16 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.taobao.android.weex.plugin.gradle'
 
+def config = rootProject.ext// android基本配置
+
 android {
-    compileSdkVersion project.compileSdkVersion
-    buildToolsVersion project.buildToolsVersion
+    compileSdkVersion config.android.compileSdkVersion
+    buildToolsVersion config.android.buildToolsVersion
 
     defaultConfig {
         applicationId "com.weex.app"
-        minSdkVersion project.appMinSdkVersion
-        targetSdkVersion project.targetSdkVersion
-        versionCode 1
-        versionName "1.0.0"
+        minSdkVersion config.android.minSdkVersion
+        targetSdkVersion config.android.targetSdkVersion
+        versionCode config.android.versionCode
+        versionName config.android.versionName
         ndk {
             abiFilters "x86"
             abiFilters "armeabi"
