@@ -3,14 +3,12 @@ package com.weex.app.extend;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.taobao.weex.WXSDKEngine;
-import com.taobao.weex.utils.WXLogUtils;
-import com.weex.app.WXPageActivity;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.common.WXModule;
+import com.taobao.weex.utils.WXLogUtils;
+import com.weex.app.WXPageActivity;
 
 
 public class WXEventModule extends WXModule {
