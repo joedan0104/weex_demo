@@ -1,4 +1,4 @@
-package com.weex.app.hotreload;
+package com.cdel.weex.hotreload;
 
 import android.text.TextUtils;
 

@@ -15,9 +15,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.weex.app.hotreload.HotReloadManager;
-import com.weex.app.util.AppConfig;
-import com.weex.app.util.Constants;
+import com.cdel.weex.AbsWeexActivity;
+import com.cdel.weex.hotreload.HotReloadManager;
+import com.cdel.weex.util.AppConfig;
+import com.cdel.weex.util.Constants;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.taobao.weex.WXEnvironment;

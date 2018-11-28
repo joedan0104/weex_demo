@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.weex.app.extend;
+package com.cdel.weex.extend;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
@@ -39,14 +39,14 @@ public class BlurTool {
          * blur complete event.(Notice:in sub thread)
          *
          * @param bitmap the blurred bitmap
-         * */
+         */
         void onBlurComplete(@NonNull Bitmap bitmap);
     }
 
     private static ExecutorService sExecutorService = Executors.newCachedThreadPool(new ThreadFactory() {
         @Override
         public Thread newThread(Runnable r) {
-            return new Thread(r,"wx_blur_thread");
+            return new Thread(r, "wx_blur_thread");
         }
     });
 
@@ -54,57 +54,57 @@ public class BlurTool {
 
     /**
      * radius in [0,10]
-     * */
+     */
     @NonNull
     @SuppressWarnings("unused")
     public static Bitmap blur(@NonNull Bitmap originalImage, int radius) {
         long start = System.currentTimeMillis();
-        radius = Math.min(10, Math.max(0,radius));//[0,10]
-        if(radius == 0) {
+        radius = Math.min(10, Math.max(0, radius));//[0,10]
+        if (radius == 0) {
             return originalImage;
         }
         int width = originalImage.getWidth();
         int height = originalImage.getHeight();
 
-        if(width <= 0 || height <= 0) {
+        if (width <= 0 || height <= 0) {
             return originalImage;
         }
 
         double sampling = calculateSampling(radius);
         int retryTimes = 3;
-        Bitmap sampledImage = Bitmap.createScaledBitmap(originalImage,(int)(sampling*width),(int)(sampling*height),true);
-        for(int i = 0; i < retryTimes; i++) {
+        Bitmap sampledImage = Bitmap.createScaledBitmap(originalImage, (int) (sampling * width), (int) (sampling * height), true);
+        for (int i = 0; i < retryTimes; i++) {
             try {
-                if(radius == 0) {
+                if (radius == 0) {
                     return originalImage;
                 }
                 double s = calculateSampling(radius);
-                if(s != sampling) {
+                if (s != sampling) {
                     sampling = s;
-                    sampledImage = Bitmap.createScaledBitmap(originalImage,(int)(sampling*width),(int)(sampling*height),true);
+                    sampledImage = Bitmap.createScaledBitmap(originalImage, (int) (sampling * width), (int) (sampling * height), true);
                 }
 
-                Bitmap result = stackBlur(sampledImage,radius);
-                WXLogUtils.d(TAG, "elapsed time on blurring image(radius:"+ radius + ",sampling: " + sampling + "): " + (System.currentTimeMillis() - start) + "ms");
+                Bitmap result = stackBlur(sampledImage, radius);
+                WXLogUtils.d(TAG, "elapsed time on blurring image(radius:" + radius + ",sampling: " + sampling + "): " + (System.currentTimeMillis() - start) + "ms");
                 return result;
-            }catch (Exception e) {
-                WXLogUtils.e(TAG, "thrown exception when blurred image(times = " + i + "),"+ e.getMessage());
+            } catch (Exception e) {
+                WXLogUtils.e(TAG, "thrown exception when blurred image(times = " + i + ")," + e.getMessage());
                 radius -= 1;
-                radius = Math.max(0,radius);
+                radius = Math.max(0, radius);
             }
         }
-        WXLogUtils.d(TAG, "elapsed time on blurring image(radius:"+ radius + ",sampling: " + sampling + "): " + (System.currentTimeMillis() - start) + "ms");
+        WXLogUtils.d(TAG, "elapsed time on blurring image(radius:" + radius + ",sampling: " + sampling + "): " + (System.currentTimeMillis() - start) + "ms");
         return originalImage;
     }
 
-    private static double calculateSampling(int radius){
+    private static double calculateSampling(int radius) {
         double sampling;
-        if(radius <= 3) {
-            sampling = 1/(double)2;
-        }else if(radius <= 8) {
-            sampling = 1/(double)4;
-        }else {
-            sampling = 1/(double)8;
+        if (radius <= 3) {
+            sampling = 1 / (double) 2;
+        } else if (radius <= 8) {
+            sampling = 1 / (double) 4;
+        } else {
+            sampling = 1 / (double) 8;
         }
 
         return sampling;
@@ -115,8 +115,8 @@ public class BlurTool {
         sExecutorService.execute(new Runnable() {
             @Override
             public void run() {
-                if(listener != null) {
-                    listener.onBlurComplete(blur(originalImage,radius));
+                if (listener != null) {
+                    listener.onBlurComplete(blur(originalImage, radius));
                 }
             }
         });
